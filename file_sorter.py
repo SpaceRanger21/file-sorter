@@ -3,8 +3,20 @@ import os
 import time
 
 
+class BackgroundColors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKCYAN = '\033[96m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+
+
 while True:
-    print('Welcome to file sorter!')
+    print('\nWelcome to file sorter!')
     print('This program is used to sort files based on their file extension.')
     print('You can move/copy all files with the same extension to a different folder.\n')
     print('=======================================================================')
@@ -17,7 +29,7 @@ while True:
     print('1. Start Sorting')
     print('2. Cancel (exits this script)')
     
-    choice = input('\nWhat do you want to do: ')
+    choice = input(F'\n{BackgroundColors.HEADER}What do you want to do: {BackgroundColors.ENDC}')
 
     if choice.isnumeric():
        
@@ -28,12 +40,12 @@ while True:
             moveORcopy = ''
 
             while moveORcopy == '':
-                moveORcopy = input('\n1. move\n2. copy\nWhat do you want to do: ')
+                moveORcopy = input(F'\n1. move\n2. copy\n{BackgroundColors.HEADER}\nWhat do you want to do: {BackgroundColors.ENDC}')
                 x = moveORcopy.strip()
                 if x.isnumeric() and (x == '1' or x == '2'):
                     break
                 else:
-                    print('Please enter either 1 or 2')
+                    print(f'{BackgroundColors.FAIL}ERROR: Please enter either 1 or 2{BackgroundColors.ENDC}')
                     moveORcopy = ''
 
             src_dir = ''
@@ -42,15 +54,15 @@ while True:
 
             # ----------------- Getting all necessary inputs -----------------
             while src_dir.strip() == '':
-                src_dir = input('\nEnter the Source Directory: ')
+                src_dir = input(f'\n{BackgroundColors.HEADER}Enter the Source Directory: {BackgroundColors.ENDC}')
                 if os.path.exists(src_dir):
                     continue
                 else:
-                    print(f'Source Destination "{src_dir}" does not exist, please re-enter.')
+                    print(f'{BackgroundColors.FAIL}ERROR: Source Destination "{src_dir}" does not exist, please re-enter.{BackgroundColors.ENDC}')
                     src_dir = ''
 
             while ext.strip() == '':
-                ext = input('\nEnter the File Extension: ')
+                ext = input(f'\n{BackgroundColors.HEADER}Enter the File Extension: {BackgroundColors.ENDC}')
                 if ext.startswith('.'):
                     continue
                 else:
@@ -58,7 +70,7 @@ while True:
                     ext = new_str
 
             while dst_dir.strip() == '':
-                dst_dir = input('\nEnter the Destination Directory: ')
+                dst_dir = input(f'\n{BackgroundColors.HEADER}Enter the Destination Directory: {BackgroundColors.ENDC}')
                 if os.path.exists(dst_dir):
                     continue
                 else:
@@ -77,10 +89,10 @@ while True:
                         move_start_time = time.time()
                         shutil.move(file, dst_dir)
                         move_finish_time = time.time() - move_start_time
-                        print(f'Moved "{file}" to "{dst_dir}" in {round(move_finish_time, 2)}s')
+                        print(f'{BackgroundColors.OKGREEN}Moved {BackgroundColors.OKCYAN}"{file}" {BackgroundColors.OKGREEN}to {BackgroundColors.OKCYAN}"{dst_dir}" {BackgroundColors.OKGREEN}in {round(move_finish_time, 2)}s{BackgroundColors.ENDC}')
                         count += 1
                 time_taken = time.time() - start_time
-                print(f'Operation completed, moved {count} files in {round(time_taken, 2)}s')
+                print(f'{BackgroundColors.OKGREEN}Operation completed, moved {count} files in {round(time_taken, 2)}s{BackgroundColors.ENDC}')
             elif int(moveORcopy) == 2:
                 start_time = time.time()
 
@@ -89,12 +101,12 @@ while True:
                         copy_start_time = time.time()
                         shutil.copy(file, dst_dir)
                         copy_finish_time = time.time() - copy_start_time
-                        print(f'Copied "{file}" to "{dst_dir}" in {round(copy_finish_time, 2)}s')
+                        print(f'{BackgroundColors.OKGREEN}Copied {BackgroundColors.OKCYAN}"{file}" {BackgroundColors.OKGREEN}to {BackgroundColors.OKCYAN}"{dst_dir}" {BackgroundColors.OKGREEN}in {round(copy_finish_time, 2)}s{BackgroundColors.ENDC}')
                         count += 1
                 time_taken = time.time() - start_time
-                print(f'Operation completed, moved {count} files in {round(time_taken, 2)}s')
+                print(f'{BackgroundColors.OKGREEN}Operation completed, moved {BackgroundColors.OKCYAN}{count} files {BackgroundColors.OKGREEN}in {round(time_taken, 2)}s{BackgroundColors.ENDC}')
             break
         else:
-            print('Please enter either 1 or 2')
+            print(f'{BackgroundColors.FAIL}ERROR: Please enter either 1 or 2{BackgroundColors.ENDC}')
     else:
-        print('Please enter either 1 or 2')
+        print(f'{BackgroundColors.FAIL}ERROR: Please enter either 1 or 2{BackgroundColors.ENDC}')
