@@ -80,7 +80,7 @@ while True:
     print('1. Start Sorting')
     print('2. Cancel (exits this script)')
     
-    choice = input(F'\n{BackgroundColors.HEADER}What do you want to do: {BackgroundColors.ENDC}')
+    choice = input(f'\n{BackgroundColors.HEADER}What do you want to do: {BackgroundColors.ENDC}')
 
     if choice.isnumeric():
        
@@ -121,7 +121,7 @@ while True:
                     ext = new_str
 
             while dst_dir.strip() == '':
-                dst_dir = input(f'\n{BackgroundColors.HEADER}Enter the Destination Directory: {BackgroundColors.ENDC}')
+                dst_dir = input(f'\n{BackgroundColors.HEADER}Enter the Destination Directory: {BackgroundColors.ENDC}\n')
                 if os.path.exists(dst_dir):
                     continue
                 else:
@@ -156,6 +156,7 @@ while True:
                         count += 1
                 time_taken = time.time() - start_time
                 print(f'{BackgroundColors.OKGREEN}Operation completed, moved {BackgroundColors.OKCYAN}{count} files {BackgroundColors.OKGREEN}in {round(time_taken, 2)}s{BackgroundColors.ENDC}')
+            input('\nPress Enter to exit...')
             break
         else:
             print(f'{BackgroundColors.FAIL}ERROR: Please enter either 1 or 2{BackgroundColors.ENDC}')
